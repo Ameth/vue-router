@@ -17,14 +17,16 @@ import { RouterLink, RouterView } from "vue-router";
       <!-- <HelloWorld msg="You did it!" /> -->
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/chats">Chats</RouterLink>
+        <RouterLink :to="{ name: 'home' }">Home</RouterLink>
+        <RouterLink :to="{ name: 'about' }">About</RouterLink>
+        <RouterLink :to="{ name: 'chats' }">Chats</RouterLink>
+        <RouterLink :to="{ name: 'sesion' }">Sesión</RouterLink>
       </nav>
     </div>
   </header>
 
   <RouterView />
+  <router-view name="registro"></router-view>
 </template>
 
 <style scoped>

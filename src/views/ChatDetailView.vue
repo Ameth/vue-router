@@ -1,7 +1,10 @@
 <template>
-  <!-- {{ this.$route.params }} -->
+  <!-- {{ this.$route }} -->
   <div v-for="msg in misMensajes" :key="msg.id">
     {{ msg.text }}
+  </div>
+  <div>
+    {{ query.search }}
   </div>
 </template>
 
@@ -9,6 +12,16 @@
 import { ref, computed, reactive } from "vue";
 import { useRoute } from "vue-router";
 const route = useRoute();
+
+const props = defineProps({
+  idChat: {
+    type: String,
+    default: "",
+  },
+  query: {
+    type: Object,
+  },
+});
 
 const mensajes = [
   { id: 1, text: "Chat 1", autor: 1 },
@@ -23,6 +36,6 @@ const mensajes = [
 // console.log(route.params.idChat);
 
 const misMensajes = computed(() => {
-  return mensajes.filter((item) => item.autor == route.params.idChat);
+  return mensajes.filter((item) => item.autor == props.idChat);
 });
 </script>
