@@ -6,6 +6,8 @@ import {
 import HomeView from "../views/HomeView.vue";
 import NotFoundView from "../views/404View.vue";
 
+const stage = import.meta.env.VITE_STAGE;
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -88,6 +90,15 @@ const router = createRouter({
     },
   ],
 });
+
+// Agregar rutas dinámicas
+if (stage === "test") {
+  router.addRoute({
+    path: "/profile",
+    name: "profile",
+    component: () => import("../views/ProfileView.vue"),
+  });
+}
 
 router.beforeEach((to, from) => {
   // console.log(from);

@@ -1,8 +1,3 @@
-<script setup>
-import { RouterLink, RouterView } from "vue-router";
-// import HelloWorld from "./components/HelloWorld.vue";
-</script>
-
 <template>
   <header>
     <img
@@ -21,6 +16,9 @@ import { RouterLink, RouterView } from "vue-router";
         <RouterLink :to="{ name: 'about' }">About</RouterLink>
         <RouterLink :to="{ name: 'chats' }">Chats</RouterLink>
         <RouterLink :to="{ name: 'sesion' }">Sesión</RouterLink>
+        <RouterLink v-if="router.hasRoute('profile')" :to="{ name: 'profile' }"
+          >Profile</RouterLink
+        >
       </nav>
     </div>
   </header>
@@ -28,6 +26,15 @@ import { RouterLink, RouterView } from "vue-router";
   <RouterView />
   <router-view name="registro"></router-view>
 </template>
+
+<script setup>
+import { RouterLink, RouterView, useRouter } from "vue-router";
+// import HelloWorld from "./components/HelloWorld.vue";
+
+const router = useRouter();
+
+console.log(router.hasRoute("profile"));
+</script>
 
 <style scoped>
 header {
