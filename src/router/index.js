@@ -6,7 +6,7 @@ import {
 import HomeView from "../views/HomeView.vue";
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes: [
     {
       path: "/home",
@@ -17,6 +17,9 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: HomeView,
+      meta: {
+        requiresAuth: false,
+      },
     },
     {
       path: "/sesion",
@@ -41,6 +44,9 @@ const router = createRouter({
       name: "about",
       alias: ["/acerca", "/info", "/contact"],
       component: () => import("../views/AboutView.vue"),
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/chats",
@@ -61,10 +67,35 @@ const router = createRouter({
               idChat: route.params.idChat,
             };
           },
+          // meta: {
+          //   requiresAuth: false,
+          // },
         },
       ],
+      meta: {
+        requiresAuth: true,
+      },
     },
   ],
+});
+
+router.beforeEach((to, from) => {
+  // console.log(from);
+  // console.log(to);
+  // if (to.name == "about") {
+  //   // return { name: "sesion" };
+  //   return false;
+  // }
+
+  if (to.meta.requiresAuth) {
+    // to.meta.requiresAuth = false;
+    return {
+      name: "home",
+      query: {
+        redirect: to.fullPath,
+      },
+    };
+  }
 });
 
 export default router;
