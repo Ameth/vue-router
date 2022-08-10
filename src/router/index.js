@@ -4,10 +4,20 @@ import {
   createWebHashHistory,
 } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import NotFoundView from "../views/404View.vue";
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
+    {
+      path: "/404",
+      name: "error404",
+      component: NotFoundView,
+    },
+    {
+      path: "/:catchAll(.*)",
+      redirect: "/404",
+    },
     {
       path: "/home",
       // redirect: "/",
@@ -54,7 +64,7 @@ const router = createRouter({
       component: () => import("../views/ChatView.vue"),
       children: [
         {
-          path: ":idChat",
+          path: ":idChat(\\d+)",
           name: "chat",
           component: () => import("../views/ChatDetailView.vue"),
           // props: true,
