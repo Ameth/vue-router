@@ -14,7 +14,10 @@
 </template>
 
 <script setup>
-import { ref, reactive } from "vue";
+import { ref, reactive, watch, watchEffect } from "vue";
+import { useRoute } from "vue-router";
+const route = useRoute();
+
 const chats = reactive([
   { id: 1, name: "Ameth" },
   { id: 2, name: "Gabriel" },
@@ -23,5 +26,23 @@ const chats = reactive([
   { id: 5, name: "Ronald" },
   { id: 6, name: "Ana" },
   { id: 7, name: "Maria" },
+  { id: 8, name: "Elkin" },
 ]);
+
+// watch(
+//   () => route.params,
+//   (value) => {
+//     console.log("params", value);
+//   },
+//   { inmediate: true }
+// );
+
+watchEffect(() => {
+  console.log("params", route.params);
+
+  // Aqui puedo utilizar la llamada a una función para obtener los datos desde un servidor (ej. fetchData())
+  // const fetchdata = async () => {
+  //   //...
+  // }
+});
 </script>

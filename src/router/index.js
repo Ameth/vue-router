@@ -86,16 +86,15 @@ router.beforeEach((to, from) => {
   //   // return { name: "sesion" };
   //   return false;
   // }
-
-  if (to.meta.requiresAuth) {
-    // to.meta.requiresAuth = false;
-    return {
-      name: "home",
-      query: {
-        redirect: to.fullPath,
-      },
-    };
-  }
+  // if (to.meta.requiresAuth) {
+  //   // to.meta.requiresAuth = false;
+  //   return {
+  //     name: "home",
+  //     query: {
+  //       redirect: to.fullPath,
+  //     },
+  //   };
+  // }
 });
 
 export default router;
